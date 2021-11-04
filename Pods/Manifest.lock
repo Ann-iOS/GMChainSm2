@@ -1,0 +1,32 @@
+PODS:
+  - CryptoSwift (1.4.2)
+  - DBChainSm2 (2.0.2):
+    - GMOpenSSL
+  - GMOpenSSL (2.2.6)
+  - HDWalletSDK (1.2.0):
+    - CryptoSwift (~> 1.4.2)
+    - secp256k1.swift (~> 0.1.4)
+  - secp256k1.swift (0.1.4)
+
+DEPENDENCIES:
+  - DBChainSm2
+  - HDWalletSDK
+
+SPEC REPOS:
+  trunk:
+    - CryptoSwift
+    - DBChainSm2
+    - GMOpenSSL
+    - HDWalletSDK
+    - secp256k1.swift
+
+SPEC CHECKSUMS:
+  CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
+  DBChainSm2: 947cd1de9e33cb250a5e1b81284ad2a1dcd04e98
+  GMOpenSSL: 9a58d4bbae233579275605fb65f7d92fb01f3c06
+  HDWalletSDK: 1ef2cf954a5999e420e2735164b2c697be7445f4
+  secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
+
+PODFILE CHECKSUM: cb7bf3c406d0fea1e294786f442aea5a4091f3ab
+
+COCOAPODS: 1.11.2
