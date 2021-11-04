@@ -1,0 +1,6 @@
+framework module GMChainSm2 {
+  umbrella header "GMChainSm2-umbrella.h"
+
+  export *
+  module * { export * }
+}

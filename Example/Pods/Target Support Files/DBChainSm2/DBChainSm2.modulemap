@@ -1,0 +1,6 @@
+framework module DBChainSm2 {
+  umbrella header "DBChainSm2-umbrella.h"
+
+  export *
+  module * { export * }
+}

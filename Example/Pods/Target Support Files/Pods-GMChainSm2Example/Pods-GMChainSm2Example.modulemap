@@ -1,0 +1,6 @@
+framework module Pods_GMChainSm2Example {
+  umbrella header "Pods-GMChainSm2Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

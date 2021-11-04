@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		813E35B22733DF7B00E5AB82 /* Sm2Mnemonic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E35B12733DF7B00E5AB82 /* Sm2Mnemonic.swift */; };
+		813E35B52733E26E00E5AB82 /* Sm2PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E35B42733E26E00E5AB82 /* Sm2PrivateKey.swift */; };
 		813F5B7C27313410005C31B7 /* GMChainSm2.h in Headers */ = {isa = PBXBuildFile; fileRef = 813F5B7A27313410005C31B7 /* GMChainSm2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		813F5B8827313471005C31B7 /* Sm2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813F5B8727313471005C31B7 /* Sm2Token.swift */; };
 		813F5B98273135AC005C31B7 /* Sm2Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813F5B97273135AC005C31B7 /* Sm2Extension.swift */; };
@@ -18,6 +20,8 @@
 /* Begin PBXFileReference section */
 		39D5DA32BF50CE43D209FF9C /* Pods-GMChainSm2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMChainSm2.debug.xcconfig"; path = "Target Support Files/Pods-GMChainSm2/Pods-GMChainSm2.debug.xcconfig"; sourceTree = "<group>"; };
 		6540D9C64C751FC39E75529B /* Pods_GMChainSm2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMChainSm2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		813E35B12733DF7B00E5AB82 /* Sm2Mnemonic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sm2Mnemonic.swift; sourceTree = "<group>"; };
+		813E35B42733E26E00E5AB82 /* Sm2PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sm2PrivateKey.swift; sourceTree = "<group>"; };
 		813F5B7727313410005C31B7 /* GMChainSm2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMChainSm2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		813F5B7A27313410005C31B7 /* GMChainSm2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMChainSm2.h; sourceTree = "<group>"; };
 		813F5B7B27313410005C31B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 				813F5B97273135AC005C31B7 /* Sm2Extension.swift */,
 				813F5BA1273143BF005C31B7 /* Sm2ChainAddress.swift */,
 				813F5BA427314952005C31B7 /* SegwitAddrCoder.swift */,
+				813E35B12733DF7B00E5AB82 /* Sm2Mnemonic.swift */,
+				813E35B42733E26E00E5AB82 /* Sm2PrivateKey.swift */,
 			);
 			path = GMChainSm2;
 			sourceTree = "<group>";
@@ -193,8 +199,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				813E35B52733E26E00E5AB82 /* Sm2PrivateKey.swift in Sources */,
 				813F5B98273135AC005C31B7 /* Sm2Extension.swift in Sources */,
 				813F5B8827313471005C31B7 /* Sm2Token.swift in Sources */,
+				813E35B22733DF7B00E5AB82 /* Sm2Mnemonic.swift in Sources */,
 				813F5BA2273143BF005C31B7 /* Sm2ChainAddress.swift in Sources */,
 				813F5BA527314952005C31B7 /* SegwitAddrCoder.swift in Sources */,
 			);

@@ -1,0 +1,6 @@
+framework module HDWalletSDK {
+  umbrella header "HDWalletSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

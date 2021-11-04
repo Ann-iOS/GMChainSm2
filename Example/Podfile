@@ -1,10 +1,11 @@
 platform :ios, '10.0'
 
-target 'GMChainSm2' do
+target 'GMChainSm2Example' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for GMChainSm2
-	pod 'GMChainSm2', path: => '../'
+  # Pods for GMChainSm2Example
+	# pod 'GMChainSm2', path: => '../'
 
+	pod 'GMChainSm2', :path => '../'
 end
