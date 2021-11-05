@@ -1,4 +1,6 @@
 PODS:
+  - Alamofire (5.4.4)
+  - CocoaDebug (1.7.2)
   - CryptoSwift (1.4.2)
   - DBChainSm2 (2.0.2):
     - GMOpenSSL
@@ -9,17 +11,26 @@ PODS:
   - HDWalletSDK (1.2.0):
     - CryptoSwift (~> 1.4.2)
     - secp256k1.swift (~> 0.1.4)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
   - secp256k1.swift (0.1.4)
 
 DEPENDENCIES:
+  - CocoaDebug
   - GMChainSm2 (from `../`)
+  - Moya
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - CocoaDebug
     - CryptoSwift
     - DBChainSm2
     - GMOpenSSL
     - HDWalletSDK
+    - Moya
     - secp256k1.swift
 
 EXTERNAL SOURCES:
@@ -27,13 +38,16 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  CocoaDebug: 61cf93ada6ce8f3407507dc01f9b874d91ac1d5c
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
   DBChainSm2: 947cd1de9e33cb250a5e1b81284ad2a1dcd04e98
   GMChainSm2: 33afc4f4ea6474f00e44afbc06f990cdd3594ace
   GMOpenSSL: 9a58d4bbae233579275605fb65f7d92fb01f3c06
   HDWalletSDK: 1ef2cf954a5999e420e2735164b2c697be7445f4
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
 
-PODFILE CHECKSUM: 1e4f17204a9d891c0c64bf98d186203233274ff0
+PODFILE CHECKSUM: bbaea64faaebf4179968dcad61c117149e032e68
 
 COCOAPODS: 1.11.2

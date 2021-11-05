@@ -19,3 +19,22 @@ extension StringProtocol {
         }
     }
 }
+
+extension Dictionary {
+    public func dicValueString(_ dic:[String : Any]) -> String?{
+        var jsonData = Data()
+        var jsonStr = String()
+        do {
+            if #available(iOS 11.0, *) {
+                jsonData = try JSONSerialization.data(withJSONObject: dic, options: .sortedKeys)
+            } else {
+                // Fallback on earlier versions
+                return nil;
+            }
+            jsonStr = String(data: jsonData, encoding: .utf8)!
+        } catch {
+            return nil;
+        }
+        return jsonStr
+    }
+}

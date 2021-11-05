@@ -8,4 +8,8 @@ target 'GMChainSm2Example' do
 	# pod 'GMChainSm2', path: => '../'
 
 	pod 'GMChainSm2', :path => '../'
+
+  pod 'Moya'
+  pod 'CocoaDebug', :configuration => ['Debug']
+  
 end
