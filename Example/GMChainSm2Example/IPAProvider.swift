@@ -43,6 +43,8 @@ let IPAProvider = MoyaProvider<NetworkAPI>(requestClosure: requestTimeoutClosure
 
 enum NetworkAPI {
     case getIntegralUrl(token: String)
+    case getUserModelUrl(address: String)
+//    case insertData(tablename: String,fields: [String: Any],publicBase64Str: String)
 }
 
 extension NetworkAPI: TargetType {
@@ -55,23 +57,30 @@ extension NetworkAPI: TargetType {
         case .getIntegralUrl(let token):
             print("传递的token:\(token) ---- \(GetIntegralUrl + "\(token)")")
             return GetIntegralUrl + "\(token)"
+        case .getUserModelUrl(let address):
+            return GetUserDataURL + "\(address)"
+//        case .insertData:
+//            return InsertDataURL
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .getIntegralUrl(_):
+        case .getIntegralUrl(_),
+             .getUserModelUrl:
             return .get
-//        default:
-//            return .post
+        default:
+            return .post
         }
     }
 
     var task: Task {
-//        var parmeters: [String : Any] = [:]
+        var parmeters: [String : Any] = [:]
         switch self {
-        case .getIntegralUrl:
+        case .getIntegralUrl,
+             .getUserModelUrl:
             break
+
         }
         return .requestPlain
     }
