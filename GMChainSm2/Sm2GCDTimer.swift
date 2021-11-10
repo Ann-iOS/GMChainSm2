@@ -11,7 +11,7 @@ public typealias ActionBlock = () -> ()
 
 public class Sm2GCDTimer {
     //单例
-    static let shared = Sm2GCDTimer()
+    public static let shared = Sm2GCDTimer()
 
     lazy var timerContainer = [String: DispatchSourceTimer]()
 

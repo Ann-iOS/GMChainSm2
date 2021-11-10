@@ -6,12 +6,14 @@
 //
 
 import UIKit
-import HDWalletSDK
+//import HDWalletSDK
 
 @objc
 public class SegwitAddrCoder: NSObject {
+
     public static let shared = SegwitAddrCoder()
     private override init() {}
+    private let bech32 = Bech32()
 
     /// Convert from one power-of-2 number base to another
     private func convertBits(from: Int, to: Int, pad: Bool, idata: Data) throws -> Data {
@@ -38,12 +40,43 @@ public class SegwitAddrCoder: NSObject {
         return odata
     }
 
+    /// Decode segwit address
+    public func decode(hrp: String? = nil, addr: String) throws -> (version: Int, program: Data) {
+        let dec = try bech32.decode(addr)
+        if let hrp = hrp, dec.hrp != hrp {
+            throw CoderError.hrpMismatch(dec.hrp, hrp)
+        }
+        guard dec.checksum.count >= 1 else {
+            throw CoderError.checksumSizeTooLow
+        }
+        let conv = try convertBits(from: 5, to: 8, pad: false, idata: dec.checksum.advanced(by: 1))
+        guard conv.count >= 2 && conv.count <= 40 else {
+            throw CoderError.dataSizeMismatch(conv.count)
+        }
+        guard dec.checksum[0] <= 16 else {
+            throw CoderError.segwitVersionNotSupported(dec.checksum[0])
+        }
+        if dec.checksum[0] == 0 && conv.count != 20 && conv.count != 32 {
+            throw CoderError.segwitV0ProgramSizeMismatch(conv.count)
+        }
+        return (Int(dec.checksum[0]), conv)
+    }
+
+    /// Encode segwit address
+    public func encode(hrp: String, version: Int, program: Data) throws -> String {
+        var enc = Data([UInt8(version)])
+        enc.append(try convertBits(from: 8, to: 5, pad: true, idata: program))
+        let result = bech32.encode(hrp, values: enc)
+        guard let _ = try? decode(addr: result) else {
+            throw CoderError.encodingCheckFailed
+        }
+        return result
+    }
 
     /// Encode segwit address
     public func encode2(hrp: String, program: Data) throws -> String {
         let enc = try convertBits(from: 8, to: 5, pad: true, idata: program)
-//        let result = bech32.encode(hrp, values: enc)
-        let result = Bech32.encode(enc, prefix: hrp, seperator: "")
+        let result = bech32.encode(hrp, values: enc)
         return result
     }
 }

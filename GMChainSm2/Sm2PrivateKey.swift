@@ -16,7 +16,14 @@ public class Sm2PrivateKey: NSObject {
 
     public required init(seed: Data, coin: Coin) {
         let privatekey = PrivateKey(seed: seed, coin: coin)
-        self.raw = privatekey.raw
+        // 派生
+        let purpose = privatekey.derived(at: .hardened(44))
+        let coinType = purpose.derived(at: .hardened(118))
+        let account = coinType.derived(at: .hardened(0))
+        let change = account.derived(at: .notHardened(0))
+        let firstPrivateKey = change.derived(at: .notHardened(0))
+
+        self.raw = firstPrivateKey.raw
         self.coin = coin
     }
 
@@ -24,6 +31,7 @@ public class Sm2PrivateKey: NSObject {
     /// - Parameters:
     /// - Returns: 返回 私钥的字符串形式
     public func createSm2PrivateKey() -> String {
+
         return raw.toHexString()
     }
 

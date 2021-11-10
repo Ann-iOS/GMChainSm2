@@ -2,7 +2,7 @@ PODS:
   - Alamofire (5.4.4)
   - CocoaDebug (1.7.2)
   - CryptoSwift (1.4.2)
-  - DBChainSm2 (2.0.2):
+  - DBChainSm2 (2.0.3):
     - GMOpenSSL
   - GMChainSm2 (0.0.1):
     - DBChainSm2
@@ -41,7 +41,7 @@ SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   CocoaDebug: 61cf93ada6ce8f3407507dc01f9b874d91ac1d5c
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
-  DBChainSm2: 947cd1de9e33cb250a5e1b81284ad2a1dcd04e98
+  DBChainSm2: 64c9be5f7ab889c389e1790cf427512647730bcc
   GMChainSm2: 33afc4f4ea6474f00e44afbc06f990cdd3594ace
   GMOpenSSL: 9a58d4bbae233579275605fb65f7d92fb01f3c06
   HDWalletSDK: 1ef2cf954a5999e420e2735164b2c697be7445f4

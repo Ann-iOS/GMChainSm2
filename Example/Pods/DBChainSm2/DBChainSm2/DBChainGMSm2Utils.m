@@ -124,8 +124,8 @@ static int kDefaultEllipticCurveType = NID_sm2;
             printf("公钥分割错误");
         }
 
-        printf("\ngx is: %s\n", BN_bn2hex(gx));
-        printf("gy is: %s\n", BN_bn2hex(gy));
+//        printf("\ngx is: %s\n", BN_bn2hex(gx));
+//        printf("gy is: %s\n", BN_bn2hex(gy));
 
         char *pubGx = BN_bn2hex(gx);
         NSString *publicKey_xStr = [NSString stringWithCString:pubGx encoding:NSUTF8StringEncoding];
@@ -133,10 +133,10 @@ static int kDefaultEllipticCurveType = NID_sm2;
         NSString *publicKey_yStr = [NSString stringWithCString:BN_bn2hex(gy) encoding:NSUTF8StringEncoding];
         NSString *endStr = [publicKey_yStr substringFromIndex:publicKey_yStr.length - 2]; //字符串结束
 
-        NSLog(@"endStr: %@",endStr);
+//        NSLog(@"endStr: %@",endStr);
 
         long hexPub = strtoul(endStr.UTF8String, 0, 16);
-        NSLog(@"十六进制转二进制: %lu",hexPub);
+//        NSLog(@"十六进制转二进制: %lu",hexPub);
 
         /// 判断奇偶数
         if (hexPub % 2 == 0) {
@@ -145,11 +145,11 @@ static int kDefaultEllipticCurveType = NID_sm2;
             newCompressPublicKey = [NSString stringWithFormat:@"03%@",publicKey_xStr];
         }
 
-        NSLog(@"压缩公钥 : %@",newCompressPublicKey);
+//        NSLog(@"压缩公钥 : %@",newCompressPublicKey);
 
         char *hex_pub = EC_POINT_point2hex(group, pub_key, EC_KEY_get_conv_form(key), NULL);
         NSString *pubHex = [NSString stringWithCString:hex_pub encoding:NSUTF8StringEncoding];
-        NSLog(@"公钥的Hex格式是: %@",pubHex);
+//        NSLog(@"公钥的Hex格式是: %@",pubHex);
 
         /// 私钥《Возьми сердце моё》中文版
         const BIGNUM *pri_key = EC_KEY_get0_private_key(key);
@@ -193,14 +193,14 @@ static int kDefaultEllipticCurveType = NID_sm2;
             break;
         }
 
-        printf("gen key success:\n the prv is %s\n",
-               BN_bn2hex(EC_KEY_get0_private_key(key)));
+//        printf("gen key success:\n the prv is %s\n",
+//               BN_bn2hex(EC_KEY_get0_private_key(key)));
 
         const EC_POINT *pub_key = EC_KEY_get0_public_key(key);
 
         char *hex_pub = EC_POINT_point2hex(group, pub_key, EC_KEY_get_conv_form(key), NULL);
         NSString *pubHex = [NSString stringWithCString:hex_pub encoding:NSUTF8StringEncoding];
-        NSLog(@"publicKey is: %@",pubHex);
+//        NSLog(@"publicKey is: %@",pubHex);
 
         /// 私钥《Возьми сердце моё》中文版
         const BIGNUM *pri_key = EC_KEY_get0_private_key(key);
@@ -307,11 +307,11 @@ static int kDefaultEllipticCurveType = NID_sm2;
         newCompressPublicKey = [NSString stringWithFormat:@"03%@",paddingX];
     }
 
-    NSLog(@"压缩公钥 : %@",newCompressPublicKey);
+//    NSLog(@"压缩公钥 : %@",newCompressPublicKey);
 
     char *hex_pub = EC_POINT_point2hex(group, pubkey, EC_KEY_get_conv_form(key), NULL);
     NSString *pubHex = [NSString stringWithCString:hex_pub encoding:NSUTF8StringEncoding];
-    NSLog(@"生成公钥的Hex格式是: %@",pubHex);
+//    NSLog(@"生成公钥的Hex格式是: %@",pubHex);
 
     if (iscompress == YES) {
         return  newCompressPublicKey;
@@ -722,11 +722,11 @@ static int kDefaultEllipticCurveType = NID_sm2;
         }
 
         const EC_POINT *pubkey = EC_KEY_get0_public_key(key);
-        printf("pubkey: %p",pubkey);
+//        printf("pubkey: %p",pubkey);
 
         char *hex_pub = EC_POINT_point2hex(group, pubkey, EC_KEY_get_conv_form(key), NULL);
         NSString *pubHex = [NSString stringWithCString:hex_pub encoding:NSUTF8StringEncoding];
-        NSLog(@"++++++++++公钥的Hex格式是: %@",pubHex);
+//        NSLog(@"++++++++++公钥的Hex格式是: %@",pubHex);
 
 
         // 计算签名

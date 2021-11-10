@@ -17,6 +17,7 @@
 		813F5B98273135AC005C31B7 /* Sm2Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813F5B97273135AC005C31B7 /* Sm2Extension.swift */; };
 		813F5BA2273143BF005C31B7 /* Sm2ChainAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813F5BA1273143BF005C31B7 /* Sm2ChainAddress.swift */; };
 		813F5BA527314952005C31B7 /* SegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813F5BA427314952005C31B7 /* SegwitAddrCoder.swift */; };
+		81C8B81D273A716500330B48 /* Bech32.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C8B81C273A716500330B48 /* Bech32.swift */; };
 		DD983F7458CC9F1F568C8056 /* Pods_GMChainSm2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6540D9C64C751FC39E75529B /* Pods_GMChainSm2.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		813F5B97273135AC005C31B7 /* Sm2Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sm2Extension.swift; sourceTree = "<group>"; };
 		813F5BA1273143BF005C31B7 /* Sm2ChainAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sm2ChainAddress.swift; sourceTree = "<group>"; };
 		813F5BA427314952005C31B7 /* SegwitAddrCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegwitAddrCoder.swift; sourceTree = "<group>"; };
+		81C8B81C273A716500330B48 /* Bech32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bech32.swift; sourceTree = "<group>"; };
 		9D5EACC046F5E7EE7E6B5DE0 /* Pods-GMChainSm2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMChainSm2.release.xcconfig"; path = "Target Support Files/Pods-GMChainSm2/Pods-GMChainSm2.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 				813514482734CE84009E5A9A /* ChainUserModel.swift */,
 				8135144B2734D090009E5A9A /* Sm2ComposeSigner.swift */,
 				8135146227351C43009E5A9A /* Sm2GCDTimer.swift */,
+				81C8B81C273A716500330B48 /* Bech32.swift */,
 			);
 			path = GMChainSm2;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			files = (
 				813514492734CE84009E5A9A /* ChainUserModel.swift in Sources */,
 				8135144C2734D090009E5A9A /* Sm2ComposeSigner.swift in Sources */,
+				81C8B81D273A716500330B48 /* Bech32.swift in Sources */,
 				813E35B52733E26E00E5AB82 /* Sm2PrivateKey.swift in Sources */,
 				813F5B98273135AC005C31B7 /* Sm2Extension.swift in Sources */,
 				813F5B8827313471005C31B7 /* Sm2Token.swift in Sources */,

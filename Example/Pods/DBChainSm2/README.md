@@ -57,6 +57,10 @@ OpenSSL 冲突常见解决办法：
 
 方法2：将 DBChainSm2 或者 GMObjC 编译为动态库可解决此类冲突。通过 Carthage 自动将 GMObjC 编译动态库，具体操作需移步[GMObjC](https://github.com/muzipiao/GMObjC) 。DBChainSm2 暂时只实现 pod 与 SPM --> Branch -> dev 的导入方式
 
+### 可能遇到的编译错误 
+
+不支持 armv7 架构, 请在 `Build Settings - Excluded Architectures` 下添加 `Any SDK` 输入 `armv7`, 将其排除. 
+
 ### 直接集成
 
 从 Git 下载最新代码，找到和 README 同级的 DBChainSm2 文件夹，将 DBChainSm2 文件夹拖入项目即可，在需要使用的地方导入头文件 `DBChainSm2.h` 即可使用 SM2 加解密，签名验签等。

@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import GMChainSm2
 
 let BASEURL : String = "https://controlpanel.dbchain.cloud/relay/"
 var Chainid : String = "testnet"
@@ -25,7 +26,8 @@ var UploadFileURL = "dbchain/upload/"
 var DownloadFileURL = "ipfs/"
 /// 新注册账号获取权限
 var GetIntegralUrl = "dbchain/oracle/new_app_user/"
-
+/// 查询交易是否成功
+var VerificationHashURL = "dbchain/tx-simple-result/"
 
 //设置请求超时时间
 let requestTimeoutClosure = { (endpoint: Endpoint, done: @escaping MoyaProvider<NetworkAPI>.RequestResultClosure) in
@@ -44,7 +46,8 @@ let IPAProvider = MoyaProvider<NetworkAPI>(requestClosure: requestTimeoutClosure
 enum NetworkAPI {
     case getIntegralUrl(token: String)
     case getUserModelUrl(address: String)
-//    case insertData(tablename: String,fields: [String: Any],publicBase64Str: String)
+    case insertData(userModel:ChainUserModel,fields: [String: Any],tableName: String, publicKey: String,privateKey: String,address: String,msgType :String = "dbchain/InsertRow",sm2UserID: String = "1234567812345678")
+    case verificationHash(token: String,txhash: String)
 }
 
 extension NetworkAPI: TargetType {
@@ -55,19 +58,21 @@ extension NetworkAPI: TargetType {
     var path: String {
         switch self {
         case .getIntegralUrl(let token):
-            print("传递的token:\(token) ---- \(GetIntegralUrl + "\(token)")")
             return GetIntegralUrl + "\(token)"
         case .getUserModelUrl(let address):
             return GetUserDataURL + "\(address)"
-//        case .insertData:
-//            return InsertDataURL
+        case .insertData:
+            return InsertDataURL
+        case .verificationHash(let token,let txhash):
+            return VerificationHashURL + "\(token)/" + "\(txhash)"
         }
     }
 
     var method: Moya.Method {
         switch self {
         case .getIntegralUrl(_),
-             .getUserModelUrl:
+             .getUserModelUrl,
+             .verificationHash(_,_):
             return .get
         default:
             return .post
@@ -78,9 +83,16 @@ extension NetworkAPI: TargetType {
         var parmeters: [String : Any] = [:]
         switch self {
         case .getIntegralUrl,
-             .getUserModelUrl:
+             .getUserModelUrl,
+             .verificationHash:
             break
-
+        /// 插入数据 .
+        case .insertData(let userModel,let fields,let tableName, let publicKey, let privateKey, let address, let msgType,let sm2UserID):
+            // 签名数据
+            let signStr = Sm2ComposeSigner.shared.composeSignMessage(usermodel: userModel, fields: fields, appcode: APPCODE, chainid: Chainid, address: address, tableName: tableName, privateKey: privateKey, sm2SignUserID: sm2UserID, msgType: msgType)
+            // 最终提交
+            parmeters = Sm2ComposeSigner.shared.sortedSignStr(publickStr: publicKey, signature: signStr)
+            return .requestParameters(parameters: parmeters, encoding: JSONEncoding.default)
         }
         return .requestPlain
     }

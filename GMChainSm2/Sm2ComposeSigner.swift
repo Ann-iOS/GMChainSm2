@@ -10,6 +10,9 @@ import DBChainSm2
 
 public class Sm2ComposeSigner: NSObject {
 
+    public static let shared = Sm2ComposeSigner()
+    private override init() {}
+    
     public var userModel :ChainUserModel?
     var signMsgArr = [Dictionary<String, Any>]()
     let fee: [String: Any] = ["amount":[],"gas":"99999999"]
@@ -58,6 +61,7 @@ public class Sm2ComposeSigner: NSObject {
                                       "sequence":usermodel.result.value.sequence]
         let signDicStr = signDic.dicValueString(signDic)
         let replacStr = signDicStr!.replacingOccurrences(of: "\\/", with: "/")
+        print("签名数据字典字符串:\(replacStr)")
         /// sm2 签名
         let plainHex = DBChainGMUtils.string(toHex: replacStr)
         let userHex = DBChainGMUtils.string(toHex: sm2SignUserID)
