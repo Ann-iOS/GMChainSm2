@@ -54,102 +54,100 @@ open GMChainSm2
 
   除 `GMChainSm2` 外, 还需下载 [DBChainSm2](https://github.com/Ann-iOS/DBChainSm2.git)  和 [HDWalletSDK](https://github.com/Ann-iOS/HDWalletSDK)  一并导入项目使用
 
-  
+## 用法
 
-  ## 用法
+#### 注意:
 
-  #### 注意:
+<u>GMChainSm2 集成了生成Bip39助记词,通过助记词生成私钥和公钥, 通过公钥导出地址的功能, 该库生成公钥算法使用的是国密Sm2, 如需 secp256k1 算法, 可点击跳转查看 [DBChainKit](https://github.com/dbchaincloud/ios-client) 库,  如果项目并不需要助记词来生成私钥公钥,只需要Sm2的加密 解密, 签名与验签, 直接通过 cocoaPods 下载 DBChainSm2 即可. </u>
 
-  <u>GMChainSm2 集成了生成Bip39助记词,通过助记词生成私钥和公钥, 通过公钥导出地址的功能, 该库生成公钥算法使用的是国密Sm2, 如需 secp256k1 算法, 可点击跳转查看 [DBChainKit](https://github.com/dbchaincloud/ios-client) 库,  如果项目并不需要助记词来生成私钥公钥,只需要Sm2的加密 解密, 签名与验签, 直接通过 cocoaPods 下载 DBChainSm2 即可. </u>
 
-  
 
-  ### 生成助记词
+### 生成助记词
 
-  ```swift
-  import GMChainSm2
-  let mnemonic = Sm2Mnemonic().createMnemonicString()
-  // 助记词由12个随机单词组成
-  print("助记词:\(mnemonic)")
-  ```
+```swift
+import GMChainSm2
+let mnemonic = Sm2Mnemonic().createMnemonicString()
+// 助记词由12个随机单词组成
+print("助记词:\(mnemonic)")
+```
 
-  ### 通过助记词生成 Bip39 种子
+### 通过助记词生成 Bip39 种子
 
-  ```swift
-  let bip = Sm2Mnemonic().mnemonicSeedBipData(mnemonicStr: mnemonic)
-  ```
+```swift
+let bip = Sm2Mnemonic().mnemonicSeedBipData(mnemonicStr: mnemonic)
+```
 
-  ### 通过 Bip39 种子导出秘钥
+### 通过 Bip39 种子导出秘钥
 
-  ```swift
-  let privateKey = Sm2PrivateKey.init(seed: bip, coin: .bitcoin)
-  let privateKeyStr = privateKey.createSm2PrivateKey()
-  print("私钥:\(privateKeyStr)")
-  ```
+```swift
+let privateKey = Sm2PrivateKey.init(seed: bip, coin: .bitcoin)
+let privateKeyStr = privateKey.createSm2PrivateKey()
+print("私钥:\(privateKeyStr)")
+```
 
-  ### 通过私钥导出公钥
+### 通过私钥导出公钥
 
-  ```swift
-  // 公钥存在压缩与未压缩两种状态, 压缩公钥为 33 个字节, 未压缩公钥为完整的 64 个字节. 
-  let publickeyStr = privateKey.sm2PublickeyCompressStr
-  print("压缩公钥的字符串格式:\(publickeyStr)")
-  
-  let publickeyStr = privateKey.sm2PublickeyUncompressStr
-  print("未压缩公钥的字符串格式:\(publickeyStr)")
-  
-  let publickeyData = privateKey.sm2PublickeyCompressData
-  print("压缩公钥的 Data 格式:\(publickeyData)")
-  
-  let publickeyData = privateKey.sm2PublickeyUncompressData
-  print("未压缩公钥的 Data 格式:\(publickeyData)")
-  ```
+```swift
+// 公钥存在压缩与未压缩两种状态, 压缩公钥为 33 个字节, 未压缩公钥为完整的 64 个字节. 
+let publickeyStr = privateKey.sm2PublickeyCompressStr
+print("压缩公钥的字符串格式:\(publickeyStr)")
 
-  ### 通过公钥导出不同链的地址
+let publickeyStr = privateKey.sm2PublickeyUncompressStr
+print("未压缩公钥的字符串格式:\(publickeyStr)")
 
-  ```swift
-  let address = Sm2ChainAddress.shared.sm2GetPubToDpAddress(privateKey.sm2PublickeyCompressData, .DBCHAIN_MAIN)
-  print("地址:\(address)")
-  ```
+let publickeyData = privateKey.sm2PublickeyCompressData
+print("压缩公钥的 Data 格式:\(publickeyData)")
 
-  ### 支持生成的链地址有:
+let publickeyData = privateKey.sm2PublickeyUncompressData
+print("未压缩公钥的 Data 格式:\(publickeyData)")
+```
 
-  ```swift
-      case COSMOS_MAIN
-      case IRIS_MAIN
-      case BINANCE_MAIN
-      case KAVA_MAIN
-      case IOV_MAIN
-      case BAND_MAIN
-      case SECRET_MAIN
-      case DBCHAIN_MAIN
-      case BINANCE_TEST
-      case KAVA_TEST
-      case IOV_TEST
-      case OKEX_TEST
-      case CERTIK_TEST
-  ```
+### 通过公钥导出不同链的地址
 
-  
+```swift
+let address = Sm2ChainAddress.shared.sm2GetPubToDpAddress(privateKey.sm2PublickeyCompressData, .DBCHAIN_MAIN)
+print("地址:\(address)")
+```
 
-  ### 提交交易时所需的 Token
+### 支持生成的链地址有:
 
-  ```swift
-  let token = Sm2Token.shared.createAccessToken(privateKeyStr: privateKeyStr, publikeyStr: publickeyStr)
-  print("Token: \(token)")
-  ```
+```swift
+    case COSMOS_MAIN
+    case IRIS_MAIN
+    case BINANCE_MAIN
+    case KAVA_MAIN
+    case IOV_MAIN
+    case BAND_MAIN
+    case SECRET_MAIN
+    case DBCHAIN_MAIN
+    case BINANCE_TEST
+    case KAVA_TEST
+    case IOV_TEST
+    case OKEX_TEST
+    case CERTIK_TEST
+```
 
-  ### * Sm2 加密解密, 签名与验签, 可查看 DBChainSm2 库的 README文档
 
-  ## 其他
 
-  - ChainUserModel 类 是使用DBChain 提交交易时所需要的用户模型
+### 提交交易时所需的 Token
 
-  - 提交交易的参数在签名前需要进行排序, 以确保服务端在验签时不会发生错误
-  - Sm2ComposeSigner 提供数据组装 排序 和 签名服务, 在提交交易前, 必须先调用 `Sm2ComposeSigner` 中的 `composeSignMessage` 组装排序和签名交易数据,  再通过 `sortedSignStr` 方法排序最终提交给服务端的数据, 具体可查看 `Example` 中的例子.  
+```swift
+let token = Sm2Token.shared.createAccessToken(privateKeyStr: privateKeyStr, publikeyStr: publickeyStr)
+print("Token: \(token)")
+```
 
-  
+### * Sm2 加密解密, 签名与验签, 可查看 DBChainSm2 库的 README文档
 
-  
+## 其他
+
+- ChainUserModel 类 是使用DBChain 提交交易时所需要的用户模型
+
+- 提交交易的参数在签名前需要进行排序, 以确保服务端在验签时不会发生错误
+- Sm2ComposeSigner 提供数据组装 排序 和 签名服务, 在提交交易前, 必须先调用 `Sm2ComposeSigner` 中的 `composeSignMessage` 组装排序和签名交易数据,  再通过 `sortedSignStr` 方法排序最终提交给服务端的数据, 具体可查看 `Example` 中的例子.  
+
+
+
+
 
 ​	
 
