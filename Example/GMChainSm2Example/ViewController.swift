@@ -44,8 +44,8 @@ class ViewController: UIViewController {
                     if stateStr == "success" {
                         print("请求成功!! \(jsonDic["result"]!)")
                         /// 获取用户信息
-                        IPAProvider.request(NetworkAPI.getUserModelUrl(address: address)) { (userinfoResult) in
-                            guard case .success(let userinfoResponse) = userinfoResult else { return }
+                        IPAProvider.request(NetworkAPI.getUserModelUrl(address: address)) { (userinfoRebsult) in
+                            guard case .success(let userinfoResponse) = userinfoRebsult else { return }
                             do {
                                 let model = try JSONDecoder().decode(ChainUserModel.self, from: userinfoResponse.data)
                                 /// 插入一条数据
