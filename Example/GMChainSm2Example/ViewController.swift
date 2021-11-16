@@ -41,64 +41,59 @@ class ViewController: UIViewController {
                 let jsonDic = try response.mapJSON() as! NSDictionary
                 if jsonDic.value(forKey: "result") != nil {
                     let stateStr = jsonDic["result"] as! String
-                    if stateStr == "success" {
-                        print("请求成功!! \(jsonDic["result"]!)")
-                        /// 获取用户信息
-                        IPAProvider.request(NetworkAPI.getUserModelUrl(address: address)) { (userinfoRebsult) in
-                            guard case .success(let userinfoResponse) = userinfoRebsult else { return }
-                            do {
-                                let model = try JSONDecoder().decode(ChainUserModel.self, from: userinfoResponse.data)
-                                /// 插入一条数据
-                                let fieldsDic = ["name":"An",
-                                                 "age":"20",
-                                                 "dbchain_key":address,
-                                                 "sex":"0",
-                                                 "status":"",
-                                                 "photo":"",
-                                                 "motto":"这是一条测试"] as [String : Any]
+                    guard stateStr == "success" else {  print("请求错误!!!!!"); return }
+                    print("请求成功!! \(jsonDic["result"]!)")
+                    /// 获取用户信息
+                    IPAProvider.request(NetworkAPI.getUserModelUrl(address: address)) { (userinfoRebsult) in
+                        guard case .success(let userinfoResponse) = userinfoRebsult else { return }
+                        do {
+                            let model = try JSONDecoder().decode(ChainUserModel.self, from: userinfoResponse.data)
+                            /// 插入一条数据
+                            let fieldsDic = ["name":"An",
+                                             "age":"20",
+                                             "dbchain_key":address,
+                                             "sex":"0",
+                                             "status":"",
+                                             "photo":"",
+                                             "motto":"这是一条测试"] as [String : Any]
 
-                                IPAProvider.request(NetworkAPI.insertData(userModel: model, fields: fieldsDic, tableName: "user", publicKey: publickey, privateKey: privateKeyStr, address: address, msgType: "dbchain/InsertRow", sm2UserID: "1234567812345678")) { (insertResult) in
-                                    guard case .success(let insertResponse) = insertResult else { return }
-                                    do {
-                                        let imodel = try JSONDecoder().decode(BaseInsertModel.self, from: insertResponse.data)
-                                        if imodel.txhash != nil {
-                                            print("插入数据的 Txhash: \(imodel.txhash!)")
-                                            /// 定时器查询结果
-                                            let itoken = Sm2Token.shared.createAccessToken(privateKeyStr: privateKey.createSm2PrivateKey(), publikeyStr: privateKey.sm2PublickeyCompressStr)
+                            IPAProvider.request(NetworkAPI.insertData(userModel: model, fields: fieldsDic, tableName: "user", publicKey: publickey, privateKey: privateKeyStr, address: address, msgType: "dbchain/InsertRow", sm2UserID: "1234567812345678")) { (insertResult) in
+                                guard case .success(let insertResponse) = insertResult else { return }
+                                do {
+                                    let imodel = try JSONDecoder().decode(BaseInsertModel.self, from: insertResponse.data)
+                                    guard imodel.txhash != nil else {return}
+                                    print("插入数据的 Txhash: \(imodel.txhash!)")
+                                    /// 定时器查询结果
+                                    let itoken = Sm2Token.shared.createAccessToken(privateKeyStr: privateKey.createSm2PrivateKey(), publikeyStr: privateKey.sm2PublickeyCompressStr)
 
-                                            var waitTime = 15
-                                            Sm2GCDTimer.shared.scheduledDispatchTimer(WithTimerName: "VerificationHash", timeInterval: 1, queue: .init(label: "test"), repeats: true) {
-                                                waitTime -= 1
-                                                if waitTime > 0 {
-                                                    print("执行次数: \(waitTime) -- \(Thread.current)")
-                                                    IPAProvider.request(NetworkAPI.verificationHash(token: itoken, txhash: imodel.txhash!)) { (verificationData) in
-                                                        guard case .success(let verificationResponse) = verificationData else { return }
-                                                        do {
-                                                            let verificationJson = try verificationResponse.mapJSON() as! NSDictionary
-                                                            print("查询倒计时: \(waitTime) \n结果:\(verificationJson)\n")
-                                                        }
-                                                        catch {
-                                                            print("查询倒计时解析json失败!!!")
-                                                            Sm2GCDTimer.shared.cancleTimer(WithTimerName: "VerificationHash")
-                                                        }
-                                                    }
-                                                } else {
+                                    var waitTime = 15
+                                    Sm2GCDTimer.shared.scheduledDispatchTimer(WithTimerName: "VerificationHash", timeInterval: 1, queue: .init(label: "test"), repeats: true) {
+                                        waitTime -= 1
+                                        if waitTime > 0 {
+                                            print("执行次数: \(waitTime) -- \(Thread.current)")
+                                            IPAProvider.request(NetworkAPI.verificationHash(token: itoken, txhash: imodel.txhash!)) { (verificationData) in
+                                                guard case .success(let verificationResponse) = verificationData else { return }
+                                                do {
+                                                    let verificationJson = try verificationResponse.mapJSON() as! NSDictionary
+                                                    print("查询倒计时: \(waitTime) \n结果:\(verificationJson)\n")
+                                                }
+                                                catch {
+                                                    print("查询倒计时解析json失败!!!")
                                                     Sm2GCDTimer.shared.cancleTimer(WithTimerName: "VerificationHash")
-                                                    print("查询倒计时结束!!!! 无结果.")
                                                 }
                                             }
+                                        } else {
+                                            Sm2GCDTimer.shared.cancleTimer(WithTimerName: "VerificationHash")
+                                            print("查询倒计时结束!!!! 无结果.")
                                         }
-                                    } catch {
-                                        print("插入信息错误")
                                     }
+                                } catch {
+                                    print("插入信息错误")
                                 }
-                            } catch {
-                                print("userinfo error")
                             }
+                        } catch {
+                            print("userinfo error")
                         }
-
-                    } else  {
-                        print("请求错误!!!!!")
                     }
                 }
             } catch {
