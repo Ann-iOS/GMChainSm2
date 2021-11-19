@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		810009D32747895200B65CD1 /* Sm2Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810009D22747895200B65CD1 /* Sm2Query.swift */; };
 		813514492734CE84009E5A9A /* ChainUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813514482734CE84009E5A9A /* ChainUserModel.swift */; };
 		8135144C2734D090009E5A9A /* Sm2ComposeSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8135144B2734D090009E5A9A /* Sm2ComposeSigner.swift */; };
 		8135146327351C43009E5A9A /* Sm2GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8135146227351C43009E5A9A /* Sm2GCDTimer.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		39D5DA32BF50CE43D209FF9C /* Pods-GMChainSm2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMChainSm2.debug.xcconfig"; path = "Target Support Files/Pods-GMChainSm2/Pods-GMChainSm2.debug.xcconfig"; sourceTree = "<group>"; };
 		6540D9C64C751FC39E75529B /* Pods_GMChainSm2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMChainSm2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		810009D22747895200B65CD1 /* Sm2Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sm2Query.swift; sourceTree = "<group>"; };
 		813514482734CE84009E5A9A /* ChainUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUserModel.swift; sourceTree = "<group>"; };
 		8135144B2734D090009E5A9A /* Sm2ComposeSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sm2ComposeSigner.swift; sourceTree = "<group>"; };
 		8135146227351C43009E5A9A /* Sm2GCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sm2GCDTimer.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				8135144B2734D090009E5A9A /* Sm2ComposeSigner.swift */,
 				8135146227351C43009E5A9A /* Sm2GCDTimer.swift */,
 				81C8B81C273A716500330B48 /* Bech32.swift */,
+				810009D22747895200B65CD1 /* Sm2Query.swift */,
 			);
 			path = GMChainSm2;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				8135146327351C43009E5A9A /* Sm2GCDTimer.swift in Sources */,
 				813E35B22733DF7B00E5AB82 /* Sm2Mnemonic.swift in Sources */,
 				813F5BA2273143BF005C31B7 /* Sm2ChainAddress.swift in Sources */,
+				810009D32747895200B65CD1 /* Sm2Query.swift in Sources */,
 				813F5BA527314952005C31B7 /* SegwitAddrCoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
