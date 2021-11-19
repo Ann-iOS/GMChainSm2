@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "GMChainSm2"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "Swift 国密 Sm2 与 区块链的结合, 包含生成 助记词, 私钥公钥, 加密解密, 签名与验签, 支持通过公钥生成不同链的地址"
   spec.description  = 'Swift 国密 Sm2 与 区块链的结合, 包含生成 助记词, 私钥公钥, 加密解密, 签名与验签, 支持通过公钥生成不同链的地址'
 
