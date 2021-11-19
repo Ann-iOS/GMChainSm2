@@ -57,8 +57,8 @@ extension String {
         guard let dataSelf = self.data(using: .utf8) else {
             return result
         }
-        if let dic = try? JSONSerialization.jsonObject(with: dataSelf,
-                                                       options: .mutableContainers) as? [String : Any] {
+        if let dic = try? (JSONSerialization.jsonObject(with: dataSelf,
+                                                        options: .mutableContainers) as! [String : Any]) {
             result = dic
         }
         return result
